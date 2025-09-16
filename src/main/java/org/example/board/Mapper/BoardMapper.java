@@ -1,0 +1,30 @@
+package org.example.board.Mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.example.board.DTO.BoardDTO;
+
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface BoardMapper {
+
+
+    // 최대 글 번호 구하기
+    public int maxNum() throws Exception;
+    // 게시글 등록
+    public void insertData(BoardDTO dto) throws Exception;
+    // 검색된 게시글 개수
+    public int getDataCount(Map<String,Object> params) throws Exception;
+    // 게시글 목록
+    public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception;
+    // 조회수 증가
+    public BoardDTO getReadData(int num) throws Exception;
+    // 게시글 상세 조회
+    public void updateHitCount(int num) throws Exception;
+    // 게시글 수정
+    public void updateData(BoardDTO dto) throws Exception;
+    // 게시글 샂게
+    public void deleteData(int num) throws Exception;
+
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.board.Mapper.BoardMapper">
+
+    <!-- 최대 글 번호 구하기 -->
+    <select id="maxNum" resultType="int">
+        SELECT COALESCE(MAX(num), 0)
+        FROM board
+
+    </select>
+
+    <!-- 게시글 등록 -->
+    <insert id="insertData"
+            parameterType="org.example.board.DTO.BoardDTO"
+            useGeneratedKeys="true"
+            keyProperty="num"
+            keyColumn="num">
+        INSERT INTO board (name, pwd, email, subject, content, ipaddr, hitcount, created)
+        VALUES (#{name}, #{pwd}, #{email}, #{subject}, #{content}, #{ipAddr}, 0, NOW())
+            RETURNING num
+    </insert>
+
+
+
+    <!-- 검색된 게시글 개수 -->
+    <select id="getDataCount" parameterType="map" resultType="int">
+        SELECT COALESCE(COUNT(*), 0)
+        FROM board
+        <where>
+            <choose>
+                <when test="searchKey eq 'name'">
+                    name ILIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+                <when test="searchKey eq 'subject'">
+                    subject ILIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- 게시글 목록 (페이징) -->
+    <select id="getLists" parameterType="map" resultType="org.example.board.DTO.BoardDTO">
+        WITH data AS (
+        SELECT
+        num,
+        name,
+        subject,
+        hitcount,
+        TO_CHAR(created, 'YYYY-MM-DD') AS created,
+        ROW_NUMBER() OVER (ORDER BY num DESC) AS rnum
+        FROM board
+        <where>
+            <choose>
+                <when test="searchKey eq 'name'">
+                    name ILIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+                <when test="searchKey eq 'subject'">
+                    subject ILIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+            </choose>
+        </where>
+        )
+        SELECT num, name, subject, hitcount, created
+        FROM data
+        WHERE rnum BETWEEN #{start} AND #{end}
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="updateHitCount" parameterType="int">
+        UPDATE board
+        SET hitcount = hitcount + 1
+        WHERE num = #{num}
+    </update>
+
+    <!-- 게시글 상세 조회 -->
+    <select id="getReadData" parameterType="int" resultType="org.example.board.DTO.BoardDTO">
+        SELECT num, name, pwd, email, subject, content, ipaddr, hitcount, created
+        FROM board
+        WHERE num = #{num}
+    </select>
+
+    <!-- 게시글 수정 -->
+    <update id="updateData" parameterType="org.example.board.DTO.BoardDTO">
+        UPDATE board
+        SET name=#{name},
+            pwd=#{pwd},
+            email=#{email},
+            subject=#{subject},
+            content=#{content}
+        WHERE num = #{num}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteData" parameterType="int">
+        DELETE FROM board WHERE num = #{num}
+    </delete>
+
+</mapper>

@@ -19,8 +19,8 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public int maxNum() throws Exception {
-        return boardMapper.maxNum();
+    public int countBoard() throws Exception {
+        return boardMapper.countBoard();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void updateHitCount(int num) throws Exception {
-        boardMapper.updateHitCount(num);
+    public void updateViews(int num) throws Exception {
+        boardMapper.updateViews(num);
     }
 
     @Override

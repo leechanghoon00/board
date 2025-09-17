@@ -24,11 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
   BoardDTO dto = new BoardDTO();
   dto.setName("해미");
-  dto.setPwd("1234");
-  dto.setEmail("ddd@df.com");
   dto.setSubject("테스트 제목2");
   dto.setContent("테스트 내용2");
-  dto.setIpAddr("123.2232.2");
   // INSERT실행
   boardMapper.insertData(dto);
   System.out.println("저장된 num = " + dto.getNum());
@@ -36,17 +33,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
   assertThat(saved).isNotNull();
   assertThat(saved.getName()).isEqualTo("해미");
-  assertThat(saved.getPwd()).isEqualTo("1234");
-  assertThat(saved.getEmail()).isEqualTo("ddd@df.com");
   assertThat(saved.getSubject()).isEqualTo("테스트 제목2");
   assertThat(saved.getContent()).isEqualTo("테스트 내용2");
-  assertThat(saved.getIpAddr()).isEqualTo("123.2232.2");
 
  }
 
  @Test
  void 게시글최대글번호조회테스트()throws Exception{
-  int maxNum = boardMapper.maxNum();
+  int maxNum = boardMapper.countBoard();
   System.out.println("최대 글번호 = " + maxNum);
   assertThat(maxNum);
  }
@@ -148,7 +142,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  int beforeHit = before.getHitCount();
 
  // 조회수 증가
- boardMapper.updateHitCount(num);
+ boardMapper.updateViews(num);
 
  BoardDTO after = boardMapper.getReadData(num);
  int afterHit = after.getHitCount();

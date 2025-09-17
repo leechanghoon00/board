@@ -58,7 +58,7 @@ class BoardServiceImplTest {
         dto2.setIpAddr("127.0.0.1");
         boardService.insertData(dto2);
 
-        int maxNum = boardService.maxNum();
+        int maxNum = boardService.countBoard();
 
         assertThat(maxNum).isEqualTo(dto2.getNum());
     }
@@ -152,7 +152,7 @@ class BoardServiceImplTest {
     dto1.setIpAddr("127.0.0.1");
     boardService.insertData(dto1);
 
-    boardService.updateHitCount(dto1.getNum());
+    boardService.updateViews(dto1.getNum());
 
     BoardDTO result = boardService.getReadData(dto1.getNum());
     assertThat(result.getHitCount()).isEqualTo(1);

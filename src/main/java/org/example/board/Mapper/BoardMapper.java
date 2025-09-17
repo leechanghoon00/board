@@ -11,17 +11,17 @@ public interface BoardMapper {
 
 
     // 최대 글 번호 구하기
-    public int maxNum() throws Exception;
+    public int countBoard() throws Exception;
     // 게시글 등록
     public void insertData(BoardDTO dto) throws Exception;
     // 검색된 게시글 개수
     public int getDataCount(Map<String,Object> params) throws Exception;
     // 게시글 목록
     public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception;
-    // 조회수 증가
-    public BoardDTO getReadData(int num) throws Exception;
     // 게시글 상세 조회
-    public void updateHitCount(int num) throws Exception;
+    public BoardDTO getReadData(int num) throws Exception;
+    // 조회수 증가
+    public void updateViews(int num) throws Exception;
     // 게시글 수정
     public void updateData(BoardDTO dto) throws Exception;
     // 게시글 샂게

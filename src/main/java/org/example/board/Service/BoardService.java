@@ -1,14 +1,13 @@
 package org.example.board.Service;
 
 import org.example.board.DTO.BoardDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public interface BoardService {
 
 
-    public int maxNum() throws Exception;
+    public int countBoard() throws Exception;
 
     public void insertData(BoardDTO dto) throws Exception;
 
@@ -19,7 +18,7 @@ public interface BoardService {
 
     public BoardDTO getReadData(int num) throws Exception;
 
-    public void updateHitCount(int num) throws Exception;
+    public void updateViews(int num) throws Exception;
 
     public void updateData(BoardDTO dto) throws Exception;
 

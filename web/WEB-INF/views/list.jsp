@@ -1,5 +1,16 @@
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <body>
+
+<%
+    // 컨트롤러에서 전달받은 데이터 꺼내오기
+    List<HashMap<String,Object>> list = (List<HashMap<String,Object>>) request.getAttribute("list");
+    Integer countBoard = (Integer) request.getcountBoard("countBoard");
+%>
 전체 글 수 : <%=countBoard%>/리스트 사이즈 : <%=list.size%>
 <br/>
 

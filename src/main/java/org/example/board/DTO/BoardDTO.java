@@ -3,13 +3,11 @@ package org.example.board.DTO;
 public class BoardDTO {
     private Integer num;
     private String name;
-    private String pwd;
-    private String email;
     private String subject;
     private String content;
-    private String ipAddr;
+    private String category;
     private String created;
-    private int hitCount;
+    private int views;
 
     public Integer getNum() {
         return num;
@@ -25,22 +23,6 @@ public class BoardDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getSubject() {
@@ -59,12 +41,12 @@ public class BoardDTO {
         this.content = content;
     }
 
-    public String getIpAddr() {
-        return ipAddr;
+    public String getCategory() {
+        return category;
     }
 
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getCreated() {
@@ -75,11 +57,11 @@ public class BoardDTO {
         this.created = created;
     }
 
-    public int getHitCount() {
-        return hitCount;
+    public int getViews() {
+        return views;
     }
 
-    public void setHitCount(int hitCount) {
-        this.hitCount = hitCount;
+    public void setViews(int views) {
+        this.views = views;
     }
 }

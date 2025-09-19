@@ -7,12 +7,12 @@
 
 
     <!-- 1 게시글 등록 -->
-<insert id="insertData" parameterType="org.example.board.dto.BoardDTO" >
+<insert id="insertData" parameterType="org.example.board.DTO.BoardDTO" >
     insert into board (name,subject,content,views,created)
     values (#{name},#{subject},#{content},0,NOW());
 </insert>
     <!-- 2 게시글 수정 -->
-<update id="updateData" parameterType="org.example.board.dto.BoardDTO">
+<update id="updateData" parameterType="org.example.board.DTO.BoardDTO">
     update board
     set  = subject = #{subject},
         content = #{content}
@@ -20,10 +20,10 @@
 </update>
     <!-- 3 게시글 삭제 -->
 <delete id="deleteData" parameterType="int">
-    delete from board whwere num = #{num}
+    delete from board where num = #{num}
 </delete>
     <!-- 4 목록에서 눌렀을 때 게시글 상세 조회 -->
-<select id="getReadData" parameterType="int"  resultType="org.example.board.dto.BoardDTO">
+<select id="getReadData" parameterType="int"  resultType="org.example.board.DTO.BoardDTO">
     select name,subject,content,views,created
     from board where num =#{num}
 </select>
@@ -33,20 +33,26 @@
 </select>
 
     <!-- 6 게시글 목록 (페이징) -->
-<select id="getLists" parameterType="map" resultType="org.example.board.dto.BoardDTO">
-    select num,name,subject,views,created
-    from board order by num desc
-    limit #{pageSize} offset (#{page}-1) * #{pageSize}
-</select>
+<!--<select id="getLists" parameterType="map" resultType="org.example.board.dto.BoardDTO">-->
+<!--    select num,name,subject,views,created-->
+<!--    from board order by num desc-->
+<!--    limit #{pageSize} offset (#{page}-1) * #{pageSize}-->
+<!--</select>-->
 
     <!-- 7 검색으로 게시글 조회하기 (목록안에 넣을수있지않을까..) -->
+<select id="getLists" parameterType="map" resultType="org.example.board.DTO.BoardDTO">
+select num,name,subject,views,category,created
+from board where category = #{category}
+    and subject ilike concat('%',#{keyword},'%') order by num desc
+limit 10 offset (#{page} - 1) * 10;
 
+</select>
 
     <!-- 8 조회수 증가 -->
 <update id="updateViews" parameterType="int">
 update board
 set views = views +1
-where num = ${num}
+where num = #{num}
 </update>
 
 

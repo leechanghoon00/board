@@ -1,24 +1,48 @@
 package org.example.board.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+
+
+
+import jakarta.servlet.http.HttpServlet;
+
+import org.example.board.DAO.BoardDAO;
+import org.example.board.DAO.BoardDAOImpl;
+import org.example.board.DTO.BoardDTO;
+import org.example.board.Mapper.BoardMapper;
 import org.example.board.Service.BoardService;
-import org.example.board.util.MyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.board.Service.ServiceImpl.BoardServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
-public class BoardController {
+public class BoardController extends HttpServlet {
 
-
-    @Autowired
+    private BoardDAO DAO = new BoardDAOImpl();
     private BoardService boardService;
+    public BoardController(BoardService boardService){
+        this.boardService=boardService;
+    }
 
-    @Autowired
-    private MyUtil myUtil;
+    @GetMapping("/board/list")
+public String list (@RequestParam("keyword") String keyword,
+                    @RequestParam("category") String category,
+                    @RequestParam("page") int page,
+                    Model model) throws Exception {
 
-    @RequestMapping(value = "/list.action")
-    public String list(HttpServletRequest request) throws Exception{
+
+
+        List<BoardDTO> boardlist = boardService.getLists(keyword,category,page);
+        model.addAttribute("boardlist",boardlist);
+
         return "list";
     }
+
+
 }

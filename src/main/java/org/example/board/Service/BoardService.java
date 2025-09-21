@@ -13,8 +13,7 @@ public interface BoardService {
 
     public int getDataCount(String searchKey, String searchValue) throws Exception;
 
-    public List<BoardDTO> getLists(int start, int end,
-                                   String searchKey, String searchValue) throws Exception;
+    public List<BoardDTO> getLists(String keyword, String category, int page) throws Exception;
 
     public BoardDTO getReadData(int num) throws Exception;
 

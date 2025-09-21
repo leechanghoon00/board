@@ -23,7 +23,7 @@ public interface BoardMapper {
     //6 검색된 게시글 개수
     public int getDataCount(Map<String,Object> params) throws Exception;
     //7 게시글 목록
-    public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception;
+    public List<BoardDTO> getLists(Map<String, Object> params) throws Exception;
 
     //8 조회수 증가
     public void updateViews(int num) throws Exception;

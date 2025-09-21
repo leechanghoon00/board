@@ -15,16 +15,21 @@
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
+        <th>카테고리</th>
+        <th>날짜</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="board" items="${boardList}">
         <tr>
-            <td>${board.boardNum}</td>
+            <td>${board.Num}</td>
             <td>
                 <a href="BoardDetail.do?num=${board.boardNum}&page=${page}">${board.title}</a>
             </td>
-            <td>${board.writer}</td>
+            <td>${board.subject}</td>
+            <td>${board.category}</td>
+            <td>${board.created}</td>
+
         </tr>
     </c:forEach>
     </tbody>

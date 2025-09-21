@@ -37,8 +37,13 @@ public class BoardServiceImpl implements BoardService {
         return boardMapper.getDataCount(a);        }
 
     @Override
-    public List<BoardDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception {
-        return boardMapper.getLists(start, end, searchKey, searchValue);
+    public List<BoardDTO> getLists(String keyword, String category, int page) throws Exception {
+        Map<String, Object> parms= new HashMap<>();
+        parms.put("keyword",keyword);
+        parms.put("category",category);
+        parms.put("page",page);
+
+        return boardMapper.getLists(parms);
     }
 
     @Override

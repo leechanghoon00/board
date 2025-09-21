@@ -5,18 +5,33 @@
 <table>
     <thead>
     <tr>
-        <th>#번호</th>
-        <th>작성자</th>
-        <th>제목</th>
-        <th>카테고리</th>
-        <th>조회수</th>
-        <th>작성일</th>
+        <th>-번호</th>
+        <th>-작성자</th>
+        <th>-제목</th>
+        <th>-카테고리</th>
+        <th>-조회수</th>
+        <th>-작성일-</th>
     </tr>
     </thead>
 
+<script>
+    const list = [<c:forEach items="${boardlist}" var="board">
+        {
+            num: "${baord.num}",
+            name: "${baord.name}",
+            subject: "${baord.subject}",
+            category: "${baord.category}",
+            views: "${baord.views}",
+            created: "${baord.created}",
+        }</c:forEach>
 
+    ];
+    console.log(list);
+
+</script>
     <tbody>
-    <c:forEach items="${list}" var="board">
+    <c:forEach items="${boardlist}" var="board">
+
         <tr>
             <td><c:out value="${board.num}"/></td>
             <td><c:out value="${board.name}"/></td>

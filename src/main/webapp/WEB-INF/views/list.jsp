@@ -17,13 +17,14 @@
 <script>
     const list = [<c:forEach items="${boardlist}" var="board">
         {
-            num: "${baord.num}",
-            name: "${baord.name}",
-            subject: "${baord.subject}",
-            category: "${baord.category}",
-            views: "${baord.views}",
-            created: "${baord.created}",
-        }</c:forEach>
+            num: "${board.num}",
+            name: "${board.name}",
+            subject: "${board.subject}",
+            category: "${board.category}",
+            views: "${board.views}",
+            created: "${board.created}"
+        }
+        </c:forEach>
 
     ];
     console.log(list);

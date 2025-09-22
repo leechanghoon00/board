@@ -32,22 +32,25 @@
     select count(*) from board
 </select>
 
-    <!-- 6 게시글 목록 (페이징) -->
-<!--<select id="getLists" parameterType="map" resultType="org.example.board.dto.BoardDTO">-->
-<!--    select num,name,subject,views,created-->
-<!--    from board order by num desc-->
-<!--    limit #{pageSize} offset (#{page}-1) * #{pageSize}-->
-<!--</select>-->
 
     <!-- 7 검색으로 게시글 조회하기 (목록안에 넣을수있지않을까..) -->
-<select id="getLists" parameterType="map" resultType="org.example.board.DTO.BoardDTO">
-select num,name,subject,views,category,created
-from board where category = #{category}
-    and subject ilike concat('%',#{keyword},'%') order by num desc
-limit 10 offset (#{page} - 1) * 10;
 
-</select>
+    <select id="getLists" parameterType="map" resultType="org.example.board.DTO.BoardDTO">
+        select num,name,subject,views,category,created
+        from board
+        where 1=1
+        <if test="category != null and category != '' and category != '전체'">
+            and category = #{category}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and subject like concat('%', #{keyword}, '%')
+        </if>
 
+
+        order by num desc
+        limit 10 offset (#{page} - 1) * 10
+
+    </select>
     <!-- 8 조회수 증가 -->
 <update id="updateViews" parameterType="int">
 update board

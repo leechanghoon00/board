@@ -14,12 +14,12 @@ import org.example.board.Service.ServiceImpl.BoardServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 public class BoardController extends HttpServlet {
@@ -47,8 +47,20 @@ public String list (@RequestParam("keyword") String keyword,
 
         model.addAttribute("boardlist",boardlist);
 
-        return "list";
+        return "board/list";
     }
 
+    // 게시글 작성 폼 이동
+    @GetMapping("/insert")
+    public String insertForm() {
+        return "board/insert";
+    }
 
+    // 게시글 등록 처리
+    @PostMapping("/insert.do")
+    public String insert(BoardDTO dto) {
+    System.out.println("받은 데이터  : " +dto);
+
+        return "redirect:/board/list";
+    }
 }

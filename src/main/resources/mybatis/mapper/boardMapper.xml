@@ -8,8 +8,8 @@
 
     <!-- 1 게시글 등록 -->
 <insert id="insertData" parameterType="org.example.board.DTO.BoardDTO" >
-    insert into board (name,subject,content,views,created)
-    values (#{name},#{subject},#{content},0,NOW());
+    insert into board (name,subject,content,views,created,category)
+    values (#{name},#{subject},#{content},0,NOW(),#{category}});
 </insert>
     <!-- 2 게시글 수정 -->
 <update id="updateData" parameterType="org.example.board.DTO.BoardDTO">

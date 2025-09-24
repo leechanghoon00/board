@@ -24,7 +24,7 @@
 </delete>
     <!-- 4 목록에서 눌렀을 때 게시글 상세 조회 -->
 <select id="getReadData" parameterType="int"  resultType="org.example.board.DTO.BoardDTO">
-    select name,subject,content,views,created,category
+    select  num,name,subject,content,views,created,category
     from board where num =#{num}
 </select>
     <!--5  페이징을 위해 게시글 전체 개수 조회 -->

@@ -4,7 +4,7 @@
 <h2>게시글 등록</h2>
 
 <form action="insert.do" method="post">
-    <table>
+    <table border="1">
         <tr>
             <th>작성자</th>
             <td><input type="text" name="name" required></td>

@@ -69,4 +69,30 @@ public String list (@RequestParam("keyword") String keyword,
             return "redirect:/insert";
         }
     }
+
+    // 게시글 상세보기
+    @GetMapping("/board/detail")
+    public String detail(@RequestParam("num")int num, Model model) throws Exception{
+        System.out.println("상세보기 게시글 번호: " + num);
+try{
+    // 누르면 조회수 증가해줌
+    boardService.updateViews(num);
+    BoardDTO board = boardService.getReadData(num);
+    System.out.println("조회된 게시글 번호 : " +board);
+    model.addAttribute("board",board);
+    return "board/detail";
+}catch (Exception e){
+    System.out.println("실패 : "+e.getMessage());
+    e.printStackTrace();
+    return "redirect:/board/list?keyword=&category=&page=1";
+}
+    }
+
+
+    @PostMapping("/board/delete")
+    public String delete(@RequestParam("num")int num) throws Exception{
+        return "redirect:";
+    }
+
+
 }

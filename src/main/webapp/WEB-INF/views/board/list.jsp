@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<table>
+<table border="1">
     <thead>
     <tr>
         <th>-번호</th>
@@ -36,8 +36,10 @@
         <tr>
             <td><c:out value="${board.num}"/></td>
             <td><c:out value="${board.name}"/></td>
-            <td><c:out value="${board.subject}"/></td>
-            <td><c:out value="${board.category}"/></td>
+            <td>
+                <a href="/board/detail?num=${board.num}">
+                    <c:out value="${board.subject}"/>
+                </a>            <td><c:out value="${board.category}"/></td>
             <td><c:out value="${board.views}"/></td>
             <td><c:out value="${board.created}"/></td>
         </tr>

@@ -44,3 +44,7 @@
     </c:forEach>
     </tbody>
 </table>
+
+<div>
+    <button type="button" onclick="location.href='/insert'">글쓰기</button>
+</div>

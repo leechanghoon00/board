@@ -8,13 +8,13 @@
 
     <!-- 1 게시글 등록 -->
 <insert id="insertData" parameterType="org.example.board.DTO.BoardDTO" >
-    insert into board (name,subject,content,views,created)
-    values (#{name},#{subject},#{content},0,NOW());
+    insert into board (name,subject,content,views,created,category)
+    values (#{name},#{subject},#{content},0,NOW(),#{category});
 </insert>
     <!-- 2 게시글 수정 -->
 <update id="updateData" parameterType="org.example.board.DTO.BoardDTO">
     update board
-    set  = subject = #{subject},
+    set subject = #{subject},
         content = #{content}
     where num = #{num};
 </update>
@@ -24,7 +24,7 @@
 </delete>
     <!-- 4 목록에서 눌렀을 때 게시글 상세 조회 -->
 <select id="getReadData" parameterType="int"  resultType="org.example.board.DTO.BoardDTO">
-    select name,subject,content,views,created
+    select name,subject,content,views,created,category
     from board where num =#{num}
 </select>
     <!--5  페이징을 위해 게시글 전체 개수 조회 -->

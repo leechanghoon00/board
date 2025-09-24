@@ -8,9 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import org.example.board.DAO.BoardDAO;
 import org.example.board.DAO.BoardDAOImpl;
 import org.example.board.DTO.BoardDTO;
-import org.example.board.Mapper.BoardMapper;
 import org.example.board.Service.BoardService;
-import org.example.board.Service.ServiceImpl.BoardServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +36,6 @@ public String list (@RequestParam("keyword") String keyword,
 //        int pageSize = 10; // 한 페이지당 게시글 수
 //        int totalCount = boardService.getDataCount(keyword, category); // 전체 게시글 수
 //        int totalPages = (int) Math.ceil((double) totalCount / pageSize); // 전체 페이지 수
-
-
         System.out.println("받은 파라미터 - keyword: " + keyword + ", category: " + category + ", page: " + page);
 
         List<BoardDTO> boardlist = boardService.getLists(keyword,category,page);
@@ -59,8 +55,18 @@ public String list (@RequestParam("keyword") String keyword,
     // 게시글 등록 처리
     @PostMapping("/insert.do")
     public String insert(BoardDTO dto) {
-    System.out.println("받은 데이터  : " +dto);
+        System.out.println("받은 데이터: " + dto);
 
-        return "redirect:/board/list";
+        try {
+            // 게시글 등록 처리
+            boardService.insertData(dto);
+            System.out.println("게시글 등록 완료");
+            return "redirect:/board/list?keyword=&category=&page=1";
+        } catch (Exception e) {
+            System.out.println("게시글 등록 실패: " + e.getMessage());
+            e.printStackTrace();
+            // 등록 실패 시 다시 등록 폼으로 이동
+            return "redirect:/insert";
+        }
     }
 }

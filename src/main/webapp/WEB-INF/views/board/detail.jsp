@@ -36,4 +36,10 @@
     </tr>
 </table>
 
-<button type="button" onclick="history.back()">목록</button>
+<button type="button" onclick="location.href='/board/list?keyword=&category=&page=1'">목록</button>
+<button type="button" onclick="location.href='/board/updateForm?num=${board.num}'">수정</button>
+<form action="/board/delete" method="post" style="display:inline;">
+    <input type="hidden" name="num" value="${board.num}">
+    <input type="submit" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?');">
+</form>
+

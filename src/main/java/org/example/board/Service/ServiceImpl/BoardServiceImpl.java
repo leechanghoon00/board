@@ -64,6 +64,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void deleteData(int num) throws Exception {
-        boardMapper.deleteData(num--);
+        boardMapper.deleteData(num);
     }
 }

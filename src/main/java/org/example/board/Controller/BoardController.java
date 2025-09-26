@@ -20,7 +20,6 @@ import java.util.List;
 @Controller
 public class BoardController extends HttpServlet {
 
-    private BoardDAO DAO = new BoardDAOImpl();
     private BoardService boardService;
 
     public BoardController(BoardService boardService) {

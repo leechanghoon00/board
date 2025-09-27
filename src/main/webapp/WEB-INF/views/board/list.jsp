@@ -39,7 +39,8 @@
             <td>
                 <a href="/board/detail?num=${board.num}">
                     <c:out value="${board.subject}"/>
-                </a>            <td><c:out value="${board.category}"/></td>
+                </a>
+            <td><c:out value="${board.category}"/></td>
             <td><c:out value="${board.views}"/></td>
             <td><c:out value="${board.created}"/></td>
         </tr>

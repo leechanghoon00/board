@@ -6,7 +6,7 @@
 <mapper namespace="org.example.board.Mapper.CommentMapper">
 
     <!--등록 -->
-    <insert id="insertCommetn" parameterType="org.example.board.DTO.CommentDTO" >
+    <insert id="insertComment" parameterType="org.example.board.DTO.CommentDTO" >
         insert into comment(board_id,user_name,content,created)
         values(#{boardId}, #{userName}, #{content}, now());
     </insert>
@@ -15,4 +15,12 @@
     <delete id="deleteComment" parameterType="int">
         delete from comment where comment_id = #{commentId}
     </delete>
+
+    <!-- 댓글 조회 -->
+    <select id="getCommentByBoardId" parameterType="int" resultType="org.example.board.DTO.CommentDTO">
+        select comment_id, board_id, user_name, content, created
+        from comment
+        where board_id = #{boardId}
+        order by created desc
+    </select>
 </mapper>

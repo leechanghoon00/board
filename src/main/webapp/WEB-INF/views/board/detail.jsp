@@ -43,3 +43,25 @@
     <input type="submit" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?');">
 </form>
 
+<h3>댓글</h3>
+
+
+<form action="/comment/insert" method="post">
+    <input type="hidden" name="boardId" value="${board.num}">
+    이름: <input type="text" name="userName" required><br>
+    내용: <textarea name="content" required></textarea><br>
+    <input type="submit" value="댓글 등록">
+</form>
+
+
+<c:forEach var="comment" items="${comments}">
+    <div>
+        <b>${comment.userName}</b> (${comment.created})<br>
+            ${comment.content}
+        <form action="/comment/delete" method="post" style="display:inline;">
+            <input type="hidden" name="commentId" value="${comment.commentId}">
+            <input type="hidden" name="boardId" value="${board.num}">
+            <input type="submit" value="삭제">
+        </form>
+    </div>
+</c:forEach>

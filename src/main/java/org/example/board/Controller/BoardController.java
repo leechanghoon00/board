@@ -3,10 +3,11 @@ package org.example.board.Controller;
 
 import jakarta.servlet.http.HttpServlet;
 
-import org.example.board.DAO.BoardDAO;
-import org.example.board.DAO.BoardDAOImpl;
 import org.example.board.DTO.BoardDTO;
+import org.example.board.DTO.CommentDTO;
 import org.example.board.Service.BoardService;
+import org.example.board.Service.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,10 @@ import java.util.List;
 @Controller
 public class BoardController extends HttpServlet {
 
-    private BoardDAO DAO = new BoardDAOImpl();
     private BoardService boardService;
-
-    public BoardController(BoardService boardService) {
+    private CommentService commentService;
+    public BoardController(BoardService boardService,CommentService commentService) {
+        this.commentService = commentService;
         this.boardService = boardService;
     }
 
@@ -78,7 +79,13 @@ public class BoardController extends HttpServlet {
             boardService.updateViews(num);
             BoardDTO board = boardService.getReadData(num);
             System.out.println("조회된 게시글 번호 : " + board);
+
+            List<CommentDTO> comments = commentService.getCommentByBoardId(num);
+            System.out.println("조회된 댓글 수: " + comments.size());
+
+
             model.addAttribute("board", board);
+            model.addAttribute("comments",comments);
             return "board/detail";
         } catch (Exception e) {
             System.out.println("실패 : " + e.getMessage());

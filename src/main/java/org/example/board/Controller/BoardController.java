@@ -7,7 +7,7 @@ import org.example.board.DTO.BoardDTO;
 import org.example.board.DTO.CommentDTO;
 import org.example.board.Service.BoardService;
 import org.example.board.Service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.board.util.MyUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +23,13 @@ public class BoardController extends HttpServlet {
 
     private BoardService boardService;
     private CommentService commentService;
-    public BoardController(BoardService boardService,CommentService commentService) {
+    private final MyUtil myUtil;
+
+
+    public BoardController(BoardService boardService, CommentService commentService, MyUtil myUtil) {
         this.commentService = commentService;
         this.boardService = boardService;
+        this.myUtil = myUtil;
     }
 
     @GetMapping("/board/list")
@@ -33,16 +37,27 @@ public class BoardController extends HttpServlet {
                        @RequestParam("category") String category,
                        @RequestParam("page") int page,
                        Model model) throws Exception {
-//        int pageSize = 10; // 한 페이지당 게시글 수
-//        int totalCount = boardService.getDataCount(keyword, category); // 전체 게시글 수
-//        int totalPages = (int) Math.ceil((double) totalCount / pageSize); // 전체 페이지 수
+        int pageSize = 10; // 한 페이지당 게시글 수
+        int totalCount = boardService.countBoard();
+        int totalPages = myUtil.getPageCount(pageSize, totalCount);
+
+    // 검색 파라미터가 유지되도록 base URL 구성
+        String listUrl = "/board/list?keyword=" + (keyword == null ? "" : keyword)
+                + "&category=" + (category == null ? "" : category);
+
+        String pageIndexList = myUtil.pageIndexList(page, totalPages, listUrl);
+
+
         System.out.println("받은 파라미터 - keyword: " + keyword + ", category: " + category + ", page: " + page);
 
         List<BoardDTO> boardlist = boardService.getLists(keyword, category, page);
         System.out.println("조회된 리스트 크기: " + boardlist.size());
 
         model.addAttribute("boardlist", boardlist);
-
+        model.addAttribute("pageIndexList", pageIndexList);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category", category);
+        model.addAttribute("page", page);
         return "board/list";
     }
 

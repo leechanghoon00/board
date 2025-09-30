@@ -51,3 +51,23 @@
 <div>
     <button type="button" onclick="location.href='/insert'">글쓰기</button>
 </div>
+
+
+<form action="${pageContext.request.contextPath}/board/list" method="get">
+    <select name="category">
+        <option value="전체" ${category == '전체' ? 'selected' : ''}>전체</option>
+        <option value="롤" ${category == '롤' ? 'selected' : ''}>롤</option>
+        <option value="롤토체스" ${category == '롤토체스' ? 'selected' : ''}>롤토체스</option>
+        <option value="배틀그라운드" ${category == '배틀그라운드' ? 'selected' : ''}>배틀그라운드</option>
+
+    </select>
+    <input type="text" name="keyword" value="${keyword}" placeholder="제목 검색" />
+    <input type="hidden" name="page" value="1" />
+    <button type="submit">검색</button>
+</form>
+
+
+
+<div class="pagination">
+    ${pageIndexList}
+</div>

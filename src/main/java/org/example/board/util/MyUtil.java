@@ -63,7 +63,7 @@ public class MyUtil {
         // ◀이전
         if (totalPage > numPerBlock && currentPageSetup > 0) {
             //현재 블록 앞에 다른 블록이 있으면 ◀이전 링크 생성.
-            sb.append("<a href=\"" + listUrl + "pageNum=" + currentPageSetup + "\">◀이전</a>&nbsp;");
+            sb.append("<a href=\"" + listUrl + "page=" + currentPageSetup + "\">◀이전</a>&nbsp;");
         }
 
         //바로가기 페이지 (6 7 8 9 10)
@@ -76,7 +76,7 @@ public class MyUtil {
                 sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");
                 // <font color="Fuchsia">9</font>
             } else {
-                sb.append("<a href=\"" + listUrl + "pageNum=" + page + "\">" + page + "</a>&nbsp;");
+                sb.append("<a href=\"" + listUrl + "page=" + page + "\">" + page + "</a>&nbsp;");
                 // <a href="list.jsp?pageNum=7">7</a>&nbsp;
             }
 
@@ -86,7 +86,7 @@ public class MyUtil {
         // ◀이전 6 7 8 9 10 다음▶
         // ◀이전 11 12
         if (totalPage - currentPageSetup > numPerBlock) {
-            sb.append("<a href=\"" + listUrl + "pageNum=" + page + "\">다음▶</a>&nbsp;");
+            sb.append("<a href=\"" + listUrl + "page=" + page + "\">다음▶</a>&nbsp;");
             // <a href="list.jsp?pageNum=11;>다음▶</a>&nbsp;
         }
         return sb.toString();

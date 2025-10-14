@@ -6,6 +6,15 @@ public class CommentDTO {
     private String userName;
     private String content;
     private String created;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getCommentId() {
         return commentId;

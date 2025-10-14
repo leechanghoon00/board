@@ -7,13 +7,13 @@
 
     <!--등록 -->
     <insert id="insertComment" parameterType="org.example.board.DTO.CommentDTO" >
-        insert into comment(board_id,user_name,content,created)
-        values(#{boardId}, #{userName}, #{content}, now());
+        insert into comment(board_id,user_name,content,created,password)
+        values(#{boardId}, #{userName}, #{content}, now(),#{password});
     </insert>
 
     <!-- 삭제 -->
-    <delete id="deleteComment" parameterType="int">
-        delete from comment where comment_id = #{commentId}
+    <delete id="deleteComment" parameterType="org.example.board.DTO.CommentDTO">
+        delete from comment where comment_id = #{commentId} and password = #{password}
     </delete>
 
     <!-- 댓글 조회 -->

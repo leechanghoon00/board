@@ -8,8 +8,8 @@
 
     <!-- 1 게시글 등록 -->
 <insert id="insertData" parameterType="org.example.board.DTO.BoardDTO" >
-    insert into board (name,subject,content,views,created,category)
-    values (#{name},#{subject},#{content},0,NOW(),#{category});
+    insert into board (name,subject,content,views,created,category,password)
+    values (#{name},#{subject},#{content},0,NOW(),#{category},#{password});
 </insert>
     <!-- 2 게시글 수정 -->
 <update id="updateData" parameterType="org.example.board.DTO.BoardDTO">
@@ -19,8 +19,8 @@
     where num = #{num};
 </update>
     <!-- 3 게시글 삭제 -->
-<delete id="deleteData" parameterType="int">
-    delete from board where num = #{num}
+<delete id="deleteData" parameterType="org.example.board.DTO.BoardDTO">
+    delete from board where num = #{num} and password = #{password}
 </delete>
     <!-- 4 목록에서 눌렀을 때 게시글 상세 조회 -->
 <select id="getReadData" parameterType="int"  resultType="org.example.board.DTO.BoardDTO">

@@ -21,6 +21,6 @@ public interface BoardService {
 
     public void updateData(BoardDTO dto) throws Exception;
 
-    public void deleteData(int num) throws Exception;
+    public void deleteData(BoardDTO dto) throws Exception;
 
 }

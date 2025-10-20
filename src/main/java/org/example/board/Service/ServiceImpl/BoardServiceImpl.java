@@ -63,7 +63,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void deleteData(int num) throws Exception {
-        boardMapper.deleteData(num);
+    public void deleteData(BoardDTO dto) throws Exception {
+        boardMapper.deleteData(dto);
     }
 }

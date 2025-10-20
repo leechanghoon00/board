@@ -3,6 +3,14 @@
 
 <html>
 <body>
+<c:if test="${param.error == 'password_mismatch'}">
+    <p>비밀번호가 일치하지 않습니다.</p>
+</c:if>
+<c:if test="${param.success == 'comment_deleted'}">
+    <script>
+        alert('댓글이 삭제되었습니다.');
+    </script>
+</c:if>
 <h2>게시글 상세보기</h2>
 <table border="1">
     <tr>
@@ -40,7 +48,8 @@
 <button type="button" onclick="location.href='/board/updateForm?num=${board.num}'">수정</button>
 <form action="/board/delete" method="post" style="display:inline;">
     <input type="hidden" name="num" value="${board.num}">
-    <input type="submit" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?');">
+    비밀번호: <input type="password" name="password" required>
+    <input type="submit" value="삭제">
 </form>
 
 <h3>댓글</h3>
@@ -50,6 +59,7 @@
     <input type="hidden" name="boardId" value="${board.num}">
     이름: <input type="text" name="userName" required><br>
     내용: <textarea name="content" required></textarea><br>
+    비밀번호: <input type="password" name="password" required><br>
     <input type="submit" value="댓글 등록">
 </form>
 
@@ -61,6 +71,7 @@
         <form action="/comment/delete" method="post" style="display:inline;">
             <input type="hidden" name="commentId" value="${comment.commentId}">
             <input type="hidden" name="boardId" value="${board.num}">
+            비밀번호: <input type="password" name="password" required>
             <input type="submit" value="삭제">
         </form>
     </div>

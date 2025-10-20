@@ -15,7 +15,7 @@ public interface BoardMapper {
     //2 게시글 수정
     public void updateData(BoardDTO dto) throws Exception;
     //3 게시글 삭제
-    public void deleteData(int num) throws Exception;
+    public void deleteData(org.example.board.DTO.BoardDTO dto) throws Exception;
     //4 게시글 상세 조회
     public BoardDTO getReadData(int num) throws Exception;
     //5 최대 글 번호 구하기

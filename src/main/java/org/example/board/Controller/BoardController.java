@@ -76,7 +76,7 @@ public class BoardController extends HttpServlet {
             // 게시글 등록 처리
             boardService.insertData(dto);
             System.out.println("게시글 등록 완료");
-            return "redirect:/board/list?keyword=&category=&page=1";
+            return "redirect:/board/list?keyword=&category=&page=1&success=board_inserted";
         } catch (Exception e) {
             System.out.println("게시글 등록 실패: " + e.getMessage());
             e.printStackTrace();
@@ -127,9 +127,20 @@ public class BoardController extends HttpServlet {
 
     // 게시글 삭제
     @PostMapping("/board/delete")
-    public String delete(@RequestParam("num") int num) throws Exception {
-        boardService.deleteData(num);
-        return "redirect:/board/list?keyword=&category=&page=1";
+    public String delete(@RequestParam("num") int num,
+                         @RequestParam("password") String password,
+                         Model model) throws Exception {
+        try {
+            BoardDTO dto = new BoardDTO();
+            dto.setNum(num);
+            dto.setPassword(password);
+
+            boardService.deleteData(dto);
+            return "redirect:/board/list?keyword=&category=&page=1&success=board_deleted";
+        } catch (Exception e) {
+            // 비밀번호 불일치 시 에러 처리
+            return "redirect:/board/detail?num=" + num + "&error=password_mismatch";
+        }
     }
 
 

@@ -8,9 +8,17 @@ public class BoardDTO {
     private String category;
     private String created;
     private int views;
-
+    private String password;
     public Integer getNum() {
         return num;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setNum(Integer num) {

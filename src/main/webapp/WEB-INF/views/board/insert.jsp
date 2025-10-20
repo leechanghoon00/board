@@ -28,6 +28,10 @@
             <th>내용</th>
             <td><textarea name="content" rows="5" cols="40" required></textarea></td>
         </tr>
+        <tr>
+            <th>비밀번호</th>
+            <td><input type="password" name="password" required></td>
+        </tr>
     </table>
 
     <div>
